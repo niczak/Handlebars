@@ -5,8 +5,6 @@
 
 var express = require( 'express' ),
     exphbs  = require( 'express3-handlebars' ),
-    routes = require( './routes' ),
-    user = require( './routes/user' ),
     http = require( 'http' ),
     path = require( 'path' );
 
