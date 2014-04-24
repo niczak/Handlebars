@@ -1,0 +1,9 @@
+{
+  "name": "handlebars testing",
+  "version": "0.0.2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ]
+}
