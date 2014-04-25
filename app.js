@@ -4,7 +4,6 @@
  */
 
 var express = require( 'express' ),
-    exphbs  = require( 'express3-handlebars' ),
     http = require( 'http' ),
     path = require( 'path' );
 
@@ -25,13 +24,20 @@ app.configure('development', function(){
   app.use( express.errorHandler() );
 });
 
-app.get('/dataOne', function( req, res ){
-  var data = { "heading1" : "This is the heading!", "paragraph1" : "This is a bunch of content." };
-  res.send( data );
-});
-
-app.get('/dataTwo', function( req, res ){
-  var data = { "heading2" : "This is the second head!", "paragraph2" : "This is a bunch more content. So dynamic and so snazzy!" };
+app.get('/data', function( req, res ){
+  var data = 
+  { 
+    sectionOne: 
+    {
+      template: "<h2>{{heading1}}</h2><p>{{paragraph1}}</p>",
+      content : { "heading1" : "This is the heading!", "paragraph1" : "This is a bunch of content." }
+    },
+    sectionTwo: 
+    {
+      template: "<h2>{{heading2}}</h2><p>{{paragraph2}}</p>",
+      content: { "heading2" : "This is the second head!", "paragraph2" : "This is a bunch more content. So dynamic and so snazzy!" }
+    }
+  }
   res.send( data );
 });
 

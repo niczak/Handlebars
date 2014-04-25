@@ -3,13 +3,17 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+  Nicholas Kreidberg -- Developer -- @niczak
+  F. Stephen Kirschbaum -- Developer -- @fskirschbaum
 
 # THANKS
 
-    <name>
+    ... the people that made the tools that allow us to make this!
 
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3
-    jQuery, Modernizr
+    Bootstrap
+    jQuery, Modernizr, Handlebars
+    Node.js, Express
+    Grunt, Bower
