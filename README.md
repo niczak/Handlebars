@@ -121,3 +121,4 @@ app.get('/data', function( req, res ){
 There is a plan, and it will all become clear soon!!!
 
 
+# Note: This will not make your computer survive acquatic conditions or teach you how to tie a cherry stem. 
