@@ -5,15 +5,22 @@ Handlebars
 
 ### Here we will be playing with and likely breaking Handlebars.  Feel free to fork and modify.
 
-## What it is now: 
-
+##What's this?
 Here we have a snazzy new handlebars testing sandbox using grunt / bower for task management and project dependencie and a node.js / express for a server.
+This is meant to be an example of how you can use Handlebars.js on the client side to send both templates and data over to render content in real-time as well as store that content for reload and only getting new conent when needed.
+
+###Why would I want that?
+To put it simply, we envision a situation where you'd want to present a user with something on pageload without having to wait for a massive ajax call to finish. What we're proposing here is that you make a full call for the first load and then you'd be able to display something to the user right away on subsequent vists. This should make everything feel a lot snappier for the end user and result in an overall better experience overall.
+
+---
+
+###So, how do I?
 
 To use simply clone this repo and then fire off a few commands:
 
 ```
 npm install
-grunt init
+npm install -g grunt grunt-cli bower
 bower install
 grunt
 ```
@@ -39,49 +46,73 @@ Open up http://localhost:3000 and you'll see a simple example page. When you cli
 This is how it works on the client-side more or less:
 
 ```javascript
-// click listener
-$( '#convert1' ).click( function() {
 
-	// define our template
-	var content = $( "#section1" ).html(),
-			template = Handlebars.compile( content );
+// anonymous jquery function
+$( function() {
 
-	// request 'dummy data' from the server
-	$.ajax( {
-			type: 'GET', 
-	    url: '/dataOne',
-	    success: function( data, status, request ) {
-		    console.log( 'ajax success:', data );
+  // click listener
+  $( '#mainBtn' ).click( function() {
 
-		    // compile template with dummy data
-				var result = template( data );
-				console.log( result );
+  // button clicked, let's fire some ajax
+  $.ajax( {
+      type: 'GET', 
 
-				// repopulate DOM with compiled result
-				$( "#section1" ).html( result );
+      // use the data route we set up on the server
+      url: '/data',
+      
+      // it worked!!! let's deal with that
+      success: function( data, status, request ) {
+        console.log( 'ajax success:', data );
 
-				//hide the button because it's useless now...
-				$( "#btn1" ).fadeOut();
-	    },
-	    error: function( request, status ) {
+        // Let's compile the returned templates with the returned dummy data
+        var templateOne = Handlebars.compile( data.sectionOne.template ),
+            templateTwo = Handlebars.compile( data.sectionTwo.template ),
+            sectionOneContent = templateOne( data.sectionOne.content ),
+            sectionTwoContent = templateTwo( data.sectionTwo.content );
 
-	    	// handle an error situation as gracefully as possible
-
-		    console.log( 'ajax error:', status );
-		    var data = { "heading1" : "Ajax Error", "paragraph1" : "The server respoonse is: " + status };
-		    var result = template( data );
-		    $( "#section1" ).html( result );
-		    $( "#btn1" ).hide();
-	    }
-	  }, 'json');
-	});
+        // Compilation done, stick it into the DOM where it belongs.
+        $( "#sectionOne" ).html( sectionOneContent );
+        $( "#sectionTwo" ).html( sectionTwoContent );
+        
+        // We might as well do something fun with the button.
+        $( "#mainBtn" ).fadeOut( function() {
+          $( '#mainBtn' ).removeClass( 'btn-primary' ).addClass( 'btn-success' ).html( 'Gone!' ).fadeIn();
+        });
+      },
+      
+      // here be error handling... it does something similar to the code above, except that it's more error-y
+      error: function( request, status ) {
+        console.log( 'ajax error:', status );
+        var data = { "heading1" : "Ajax Error", "paragraph1" : "The server respoonse is: " + status };
+        var result = template( data );
+        $( "#sectionOne, #sectionTwo" ).html( result );
+        $( "#mainBtn" ).fadeOut( function() {
+          $( '#mainBtn' ).removeClass( 'btn-primary' ).addClass( 'btn-danger' ).html( 'Error!' ).fadeIn();
+        });
+      }
+    }, 'json');
+  });
+});
 
 ```
- And on the server side the routes have been configured thusly:
+ And on the server side we've configured a route thusly:
 
  ```javascript
- app.get('/dataOne', function( req, res ){
-  var data = { "heading1" : "This is the heading!", "paragraph1" : "This is a bunch of content." };
+app.get('/data', function( req, res ){
+  // data contains both template and content... it's beautiful, isn't it? elegant.
+  var data = 
+  { 
+    sectionOne: 
+    {
+      template: "<h2>{{heading1}}</h2><p>{{paragraph1}}</p>",
+      content : { "heading1" : "This is the heading!", "paragraph1" : "This is a bunch of content." }
+    },
+    sectionTwo: 
+    {
+      template: "<h2>{{heading2}}</h2><p>{{paragraph2}}</p>",
+      content: { "heading2" : "This is the second head!", "paragraph2" : "This is a bunch more content. So dynamic and so snazzy!" }
+    }
+  }
   res.send( data );
 });
 ```
