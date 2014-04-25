@@ -1,17 +1,26 @@
 $( function() {
   
-function objectConcat() {
-  var obj = {};
-  var length = arguments.length;
-  for ( var i = 0; i < length; i++ ) {
-    for ( prop in arguments[i] ) {
-      if ( arguments[i].hasOwnProperty( prop )) {
-          obj[prop] = arguments[i][prop];
+  function objectConcat() {
+    var obj = {};
+    var length = arguments.length;
+    for ( var i = 0; i < length; i++ ) {
+      for ( prop in arguments[i] ) {
+        if ( arguments[i].hasOwnProperty( prop )) {
+            obj[prop] = arguments[i][prop];
+        }
       }
     }
+    return obj;
   }
-  return obj;
-}
+  
+  function buildTemplateString( data ) {
+    var template;
+    
+    for ( widget in data ) {
+      console.log( widget );
+    }
+    
+  }
 
   $( '#mainBtn' ).click( function() {
   $.ajax( {
@@ -19,9 +28,13 @@ function objectConcat() {
       url: '/data',
       success: function( data, status, request ) {
         console.log( 'ajax success:', data );
+        console.log( data.length );
+        
+        // times put some stuff together, shall we?
+        buildTemplateString( data );
 
-        var template = Handlebars.compile( "<div class='col-md-" + data.widgetOne.col + "'>" + data.widgetOne.template + "</div>\n <div class='col-md-" + data.widgetTwo.col + "'>" + data.widgetTwo.template + "</div>" ),
-            remoteContent = objectConcat( data.widgetOne.content, data.widgetTwo.content ),
+        var template = Handlebars.compile( "<div class='col-md-" + data.list.col + "'>" + data.list.template + "</div>\n <div class='col-md-" + data.article.col + "'>" + data.article.template + "</div>" ),
+            remoteContent = objectConcat( data.list.content, data.list.content ),
             content = template( remoteContent ),
             $mainBtn = $( '#mainBtn' ),
             $widgetContainer = $( '#widgetContainer' ),
