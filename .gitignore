@@ -2,3 +2,5 @@ components
 node_modules
 public/components
 .DS_Store
+.codio
+.settings
