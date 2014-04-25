@@ -5,9 +5,8 @@ Handlebars
 
 ### Here we will be playing with and likely breaking Handlebars.  Feel free to fork and modify.
 
-## What it is now:
-
 ##What's this?
+Here we have a snazzy new handlebars testing sandbox using grunt / bower for task management and project dependencie and a node.js / express for a server.
 This is meant to be an example of how you can use Handlebars.js on the client side to send both templates and data over to render content in real-time as well as store that content for reload and only getting new conent when needed.
 
 ###Why would I want that?
@@ -15,14 +14,13 @@ To put it simply, we envision a situation where you'd want to present a user wit
 
 ---
 
-Here we have a snazzy new handlebars testing sandbox using grunt / bower for task management and project dependencie and a node.js / express for a server.
+###So, how do I?
 
 To use simply clone this repo and then fire off a few commands:
 
 ```
 npm install
 npm install -g grunt grunt-cli bower
-grunt init
 bower install
 grunt
 ```
