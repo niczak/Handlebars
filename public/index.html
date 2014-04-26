@@ -1,100 +1,111 @@
 <!DOCTYPE html>
 <html class="no-js">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Handlebars Testing</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand">Handlebars Testing</a>
-        </div>
-      </div>
-    </div>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Handlebars Testing</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <div class="jumbotron">
-      <div class="container text-center">
-        <h1>{{ Hello, world! }}</h1>
-        <p>Who wants to ride on my handlebars!?</p>
-        <p><a href="http://handlebarsjs.com/" target="_blank" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
-      </div>
-    </div>
+  <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
 
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-      
-      <div class="row">
-        <div class="col-md-6">
-          <h2>What's this?</h2>
-          <p>This is meant to be an example of how you can use Handlebars.js on the client side to send both templates and data over to render content in real-time as well as store that content for reload and only getting new conent when needed.</p>
-        </div>
-        <div class="col-md-6">
-          <h3>Why would I want that?</h3>
-          <p>To put it simply, we envision a situation where you'd want to present a user with something on pageload without having to wait for a massive ajax call to finish. What we're proposing here is that you make a full call for the first load and then you'd be able to display something to the user right away on subsequent vists. This should make everything feel a lot snappier for the end user and result in an overall better experience overall.</p>
-        </div>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand">Handlebars Testing</a>
       </div>
-      
-      <hr>
-      
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h3>Ready to see it in action?</h3>
-          <p>To make all the magic happen, click this button:</p>
-          <p><button id="mainBtn" class="btn btn-primary">GO!</button></p>
-        </div>
+    </div>
+  </div>
+
+  <div class="jumbotron">
+    <div class="container text-center">
+      <h1>{{ Hello, world! }}</h1>
+      <p>Who wants to ride on my handlebars!?</p>
+      <p><a href="http://handlebarsjs.com/" target="_blank" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-6">
+        <h2>What's this?</h2>
+        <p>This is meant to be an example of how you can use Handlebars.js on the client side to send both templates and data over to render content in real-time as well as store that content for reload and only getting new conent when needed.</p>
       </div>
-      
-      <hr>
-
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h2>{{heading}}</h2>
-          <p>{{paragraph}}</p>
-          <h3>Example of Handlbars Syntax</h3>
-          <p>This is what Handlebars syntax looks like. It's pretty straight forward templating. When you click the button above you will see the two example placeholders be replaces with rendered content returned from an ajax request to the server that contains both the data and the template together. It's pretty slick.</p>
-        </div>
+      <div class="col-md-6">
+        <h3>Why would I want that?</h3>
+        <p>To put it simply, we envision a situation where you'd want to present a user with something on pageload without having to wait for a massive ajax call to finish. What we're proposing here is that you make a full call for the first load and then you'd be able to display something to the user right away on subsequent vists. This should make everything feel a lot snappier for the end user and result in an overall better experience overall.</p>
       </div>
-      <div class="row text-center">
-        <div class="col-md-6" id="sectionOne">
-          <h2>{{heading1}}</h2>
-          <p>{{paragraph1}}</p>
-        </div>
-        <div class="col-md-6" id="sectionTwo">
-          <h2>{{heading2}}</h2>
-          <p>{{paragraph2}}</p>
-        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h3>Ready to see it in action?</h3>
+        <p>To make all the magic happen, click this button:</p>
+        <p>
+          <button id="mainBtn" class="btn btn-primary">GO!</button>
+        </p>
       </div>
+    </div>
 
-      <hr>
+    <hr>
 
-      <footer>
-        <div class="row">
-          <div class="col-md-12">
-            <p>&copy; Nicholas Kreidberg <span class="text-muted">and F. Stephen Kirschbaum too</span> 2014 </p>  
-          </div>
-        </div>
-      </footer>
-
-    </div> <!-- /container -->  
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h2>{{heading}}</h2>
+        <p>{{paragraph}}</p>
+        <h3>Example of Handlbars Syntax</h3>
+        <p>This is what Handlebars syntax looks like. It's pretty straight forward templating. When you click the button above you will see the two example placeholders be replaces with rendered content returned from an ajax request to the server that contains both the data and the template together. It's pretty slick.</p>
+      </div>
+    </div>
     
-    <script src="components/jquery/dist/jquery.min.js"></script>
-    <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="components/modernizr/modernizer.js"></script>
-    <script src="components/handlebars/handlebars.min.js"></script>
-    <script src="js/main.js"></script>
+    <div id="widgetContainer" style="display:none">
+    </div>
+    
+    <div id="examples" class="row text-center">
+      <div class="col-md-6" id="sectionOne">
+        <h2>{{ headingOne }}</h2>
+        <p>{{ paragraphOne }}</p>
+      </div>
+      <div class="col-md-6" id="sectionTwo">
+        <h2>{{ headingTwo }}</h2>
+        <p>{{ paragraphTwo }}</p>
+      </div>
+    </div>
+    
+    <hr>
 
-  </body>
+    <footer>
+      <div class="row">
+        <div class="col-md-12">
+          <p>&copy; Nicholas Kreidberg <span class="text-muted">and F. Stephen Kirschbaum</span> 2014</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <!-- /container -->
+
+  <script src="components/jquery/dist/jquery.min.js"></script>
+  <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="components/modernizr/modernizr.js"></script>
+  <script src="components/handlebars/handlebars.min.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+
 </html>
