@@ -66,7 +66,6 @@ $( function() {
         console.log( 'ajax success:', data );
 
         var processedData = processData( data ),
-            template = processedData.template,
             content = processedData.template( processedData.content ),
             $mainBtn = $( '#mainBtn' ),
             $widgetContainer = $( '#widgetContainer' ),
@@ -86,9 +85,10 @@ $( function() {
       },
       error: function( request, status ) {
         console.log( 'ajax error:', status );
-        var data = { "headingOne" : "Ajax Error", "paragraphOne" : "The server respoonse is: " + status, "headingTwo" : "Ajax Error", "paragraphTwo" : "The server respoonse is: " + status };
+        var template = Handlebars.compile( '<div class="row">\n<div class="col-md-12">\n<h1>{{errorHeading}}</h1>\n<p class="bg-danger">{{errorText}}</p><\n/div>\n</div>\n' );
+        var data = { "errorHeading" : "Ajax Error", "errorText" : "The Ajax request failed, the server respoonse was: " + status };
         var result = template( data );
-        $( "#sectionOne, #sectionTwo" ).html( result );
+        $( "#widgetContainer" ).html( result );
         $( "#mainBtn" ).fadeOut( function() {
           $( '#mainBtn' ).removeClass( 'btn-primary' ).addClass( 'btn-danger' ).html( 'Error!' ).fadeIn();
         });
