@@ -27,37 +27,50 @@ app.configure('development', function(){
 app.get('/data', function( req, res ){
   var data = 
   { 
-    list: 
+    buttons: 
     {
       row: 1,
       pos: 1,
-      col: 6,
-      template: "<h2>{{listWidgetHeading}}</h2>\n<p>{{listWidgetParagraph}}</p>\n<ul>\n{{#each listWidgetList}}\n<li>{{this}}</li>\n{{/each}}\n</ul>\n",
+      col: 12,
+      template: "<h2>{{buttonsWidgetHeading}}</h2>\n<div class='btn-group btn-group-justified'>\n{{#each buttonWidgetButtons}}\n<div class='btn-group'>\n<button onclick=\"window.open(\'//{{link}}\', \'_blank\');\" type='button' class='btn {{style}}'>{{#if icon}}<i class='fa {{icon}}'></i> {{/if}}{{buttonName}}</button>\n</div>\n{{/each}}\n</div>\n",
       content : 
         { 
-          "listWidgetHeading" : "List Widget Heading", 
-          "listWidgetParagraph" : "This is descriptive content for the list.", 
-          "listWidgetList" : 
-            [ 
-              'list_item_one', 
-              'list_item_two', 
-              'list_item_three', 
-              'list_item_four', 
-              'list_item_five', 
-              'list_item_six', 
-              'list_item_seven', 
-              'list_item_eight', 
-              'list_item_nine', 
-              'list_item_ten'
-            ] 
+          "buttonWidgetHeading" : "Button Widget Heading",
+          "buttonWidgetButtons" : 
+              [
+                {
+                  "buttonName" : "Google Plus",
+                  "link" : "plus.google.com.",
+                  "icon" : "fa-google-plus",
+                  "style" : "btn-success"
+                },
+                {
+                  "buttonName" : "Facebook",
+                  "link" : "www.facebook.com",
+                  "icon" : "fa-facebook",
+                  "style" : "btn-primary"
+                },
+                {
+                  "buttonName" : "Twitter",
+                  "link" : "twitter.com",
+                  "icon" : "fa-twitter",
+                  "style" : "btn-info"
+                },
+                {
+                  "buttonName" : "Pinterest",
+                  "link" : "pinterest.com",
+                  "icon" : "fa-pinterest",
+                  "style" : "btn-warning"
+                }
+              ]
         }
     },
     feed:
     {
-      row: 1,
-      pos: 2,
+      row: 2,
+      pos: 1,
       col: 6,
-      template: "<h2>{{feedWidgetHeading}}</h2>\n<ul>\n{{#each feedItems}}\n<li>\n<h3>{{feedTitle}}</h3>\n<span>{{feedMessage}}</span>\n<span>{{feedDate}}</span></li>\n{{/each}}\n</ul>\n",
+      template: "<h2>{{feedWidgetHeading}}</h2>\n{{#each feedItems}}\n<div class='panel panel-default'>\n<div class='panel-heading'>{{feedTitle}}</div>\n<div class='panel-body'>\n<p>{{feedMessage}}</p>\n</div>\n<div class='panel-footer text-muted'>\n<small>{{feedDate}}</small>\n</div>\n</div>\n{{/each}}\n",
       content: 
         { 
           "feedWidgetHeading" : "Feed Widget Heading", 
@@ -94,8 +107,8 @@ app.get('/data', function( req, res ){
     article: 
     {
       row: 2,
-      pos: 1,
-      col: 12,
+      pos: 2,
+      col: 6,
       template: "<h2>{{articleWidgetHeading}}</h2>\n{{#each articleWidgetParagraph}}\n<p>{{this}}</p>\n{{/each}}\n",
       content: 
         { 

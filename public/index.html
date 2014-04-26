@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="components/fontawesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -41,12 +42,13 @@
 
     <div class="row">
       <div class="col-md-6">
-        <h2>What's this?</h2>
-        <p>This is meant to be an example of how you can use Handlebars.js on the client side to send both templates and data over to render content in real-time as well as store that content for reload and only getting new conent when needed.</p>
+        <h3>What is all this?</h3>
+        <p>This is meant to be an example of how you can use Handlebars.js on the client side to handle dynamically sent conent <em>and</em> content and render it in real-time as well as store that content for reload and only getting new content when needed.</p>
+        <p>You can checkout the code for this project at our <a href="http://github.com/niczak/Handlebars"><i class="fa fa-github"></i> github repo</a>. Feel free to fork it and play with it and do whatever yout want with it, especially if you can make it better!</p>
       </div>
       <div class="col-md-6">
         <h3>Why would I want that?</h3>
-        <p>To put it simply, we envision a situation where you'd want to present a user with something on pageload without having to wait for a massive ajax call to finish. What we're proposing here is that you make a full call for the first load and then you'd be able to display something to the user right away on subsequent vists. This should make everything feel a lot snappier for the end user and result in an overall better experience overall.</p>
+        <p>To put it simply, we envision a situation where you'd want to present a user with something on pageload without having to wait for an ajax request to finish. What we're proposing here is that you make a full call for the first load so that you're then able to display something to the user right away on subsequent vists while requesting new information in the background. This should make everything feel a lot snappier for the end user and result in a better user experience overall, especially on mobile devices.</p>
       </div>
     </div>
 
@@ -69,21 +71,50 @@
         <h2>{{heading}}</h2>
         <p>{{paragraph}}</p>
         <h3>Example of Handlbars Syntax</h3>
-        <p>This is what Handlebars syntax looks like. It's pretty straight forward templating. When you click the button above you will see the two example placeholders be replaces with rendered content returned from an ajax request to the server that contains both the data and the template together. It's pretty slick.</p>
+        <p>This is what Handlebars syntax looks like. It's pretty straight forward templating. When you click the button above you will see the two example placeholders be replaced with rendered content returned from an ajax request to the server that contains both the data and the template together. It's pretty slick.</p>
+        <p>In the real world, you'd not have any of the Handlebar syntax actually showing, it would be seemless and just work.</p>
+        <p>Below you'll see the template syntax that will be rendered from the server when you click the button above.</p>
       </div>
     </div>
     
     <div id="widgetContainer" style="display:none">
     </div>
     
-    <div id="examples" class="row text-center">
-      <div class="col-md-6" id="sectionOne">
-        <h2>{{ headingOne }}</h2>
-        <p>{{ paragraphOne }}</p>
+    <div id="examples" class="row">
+      <div class="col-md-4">
+        <h2>{{ buttonSyntax }}</h2>
+<pre>&lt;h2&gt;{{buttonsWidgetHeading}}&lt;/h2&gt;
+&lt;div class='btn-group btn-group-justified'&gt;
+  {#each buttonWidgetButtons}}
+    &lt;div class='btn-group'&gt;
+      &lt;button onclick=&quot;window.open('//{{link}}', '_blank');&quot; type='button' class='btn {{style}}'&gt;
+        {{#if icon}}&lt;i class='fa {{icon}}'&gt;&lt;/i&gt; {{/if}}{{buttonName}}
+      &lt;/button&gt;
+    &lt;/div&gt;
+  {{/each}}
+&lt;/div&gt;</pre>
       </div>
-      <div class="col-md-6" id="sectionTwo">
-        <h2>{{ headingTwo }}</h2>
-        <p>{{ paragraphTwo }}</p>
+      <div class="col-md-4">
+        <h2>{{ feedSyntax }}</h2>
+<pre>&lt;h2&gt;{{feedWidgetHeading}}&lt;/h2&gt;
+{{#each feedItems}}
+  &lt;div class='panel panel-default'&gt;
+    &lt;div class='panel-heading'&gt;{{feedTitle}}&lt;/div&gt;
+    &lt;div class='panel-body'&gt;
+      &lt;p&gt;{{feedMessage}}&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class='panel-footer text-muted'&gt;
+      &lt;small&gt;{{feedDate}}&lt;/small&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+{{/each}}</pre>
+      </div>
+      <div class="col-md-4">
+        <h2>{{ articleSyntax }}</h2>
+<pre>&lt;h2&gt;{{articleWidgetHeading}}&lt;/h2&gt;
+{{#each articleWidgetParagraph}}
+  &lt;p&gt;{{this}}&lt;/p&gt;
+{{/each}}</pre>
       </div>
     </div>
     
