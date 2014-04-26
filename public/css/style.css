@@ -7,3 +7,7 @@ body {
 a {
   color: #00B7FF;
 }
+
+.panel {
+  margin-bottom: 1em;
+}
