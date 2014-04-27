@@ -11,3 +11,10 @@ a {
 .panel {
   margin-bottom: 1em;
 }
+
+.jumbotron {
+  background-image: url('../img/penny-farthing.jpg');
+  background-size: cover;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 5px 15px rgba(0,0,0,0.85);
+}
