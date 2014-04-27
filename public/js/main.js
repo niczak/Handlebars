@@ -1,4 +1,30 @@
 $( function() {
+
+	var $welcomeHeader = $( '#welcomeHeader' ),
+			$welcomeMessage = $( '#welcomeMessage' ),
+			$mainBtn = $( '#mainBtn' ),
+			$toggleBtn = $( '#toggleBtn'),
+			$clearBtn = $( '#clearBtn' ),
+      $widgetContainer = $( '#widgetContainer' ),
+      $examples = $( '#examples' );
+
+	$( document ).ready( function() {
+		if ( window.localStorage.data ) {
+			var oldData = JSON.parse( window.localStorage.data ),
+					template = Handlebars.compile( oldData.template ),
+					content = template( oldData.content );
+
+			$welcomeHeader.html( 'Welcome Back!' );
+			$welcomeMessage.html( 'Since you\'ve been here before, we\'ve processed your stored data and re-displayed it. You can use the Ready button to get new data, and if you refresh the page you should see it persist. You can hit the Toggle Examples Button to toggle between the syntax container that was removed and the content that was rendered. You can also hit the Clear Local Storage button to reset the Local Storage and refresh the page back to the original state.' );
+			$toggleBtn.show();
+			$clearBtn.show();
+			$mainBtn.html( 'Again?' );
+      $widgetContainer.fadeIn( function() {
+        $widgetContainer.html( content );
+        $examples.hide();
+      });
+		}
+	});
   
   function processData( data ) {
     var template = '',
@@ -47,7 +73,7 @@ $( function() {
     template += '</div>\n';
     templateArray.push( '</div>\n' );
     console.log( templateArray );
-    result.template = Handlebars.compile( template );
+    result.template = template;
     result.content = {};
     contentArray.forEach( function( el, idx, arr ) {
       for ( prop in el ) {
@@ -58,7 +84,7 @@ $( function() {
     return result;
   }
 
-  $( '#mainBtn' ).click( function() {
+  $mainBtn.click( function() {
   $.ajax( {
       type: 'GET', 
       url: '/data',
@@ -66,22 +92,25 @@ $( function() {
         console.log( 'ajax success:', data );
 
         var processedData = processData( data ),
-            content = processedData.template( processedData.content ),
-            $mainBtn = $( '#mainBtn' ),
-            $widgetContainer = $( '#widgetContainer' ),
-            $examples = $( '#examples' );
+        		template = Handlebars.compile( processedData.template ),
+            content = template( processedData.content );
+
+        window.localStorage.setItem( 'data', JSON.stringify( processedData ) );
 
         $mainBtn.fadeOut( function() {
-          $mainBtn.removeClass( 'btn-primary' ).addClass( 'btn-success' ).html( 'Gone!' ).fadeIn( function() {
+          $mainBtn.removeClass( 'btn-primary' ).addClass( 'btn-success' ).html( 'Success!' ).fadeIn( function() {
+          	$toggleBtn.fadeIn();
             setTimeout( function(){
               $mainBtn.removeClass( 'btn-success' ).addClass( 'btn-primary' ).html( 'Again?' );
-            }, 5000 );
+            }, 2000 );
           });
         });
         $widgetContainer.fadeIn( function() {
           $widgetContainer.html( content );
           $examples.hide();
         });
+        $welcomeHeader.html( 'Success!!' );
+        $welcomeMessage.html( 'There\'s a new button now, Toggle Examples, which will allow you to do exactly that that. Which is pretty cool if you want to see what was rendered. Also, if you refresh the page, you should see the content here be re-displayed automagically. It\'s not voodoo, probably. To get new data, just hit the Again? button. Be aware that this only refreshes the \'Article Widget\' today.' );
       },
       error: function( request, status ) {
         console.log( 'ajax error:', status );
@@ -96,4 +125,13 @@ $( function() {
     }, 'json');
 	});
 
+	$toggleBtn.click( function() {
+	  $examples.toggle();
+    $widgetContainer.toggle();
+	});
+
+	$clearBtn.click( function() {
+		window.localStorage.clear();
+		window.location.reload();
+	});
 });
