@@ -7,6 +7,8 @@
   <title>Handlebars Testing</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="shortcut icon" href="favicon.ico">
 
   <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap-theme.min.css">
@@ -56,11 +58,12 @@
 
     <div class="row">
       <div class="col-md-12 text-center">
-        <h3>Ready to see it in action?</h3>
-        <p>To make all the magic happen, click this button:</p>
-        <p>
-          <button id="mainBtn" class="btn btn-primary">GO!</button>
-        </p>
+        <h3 id="welcomeHeader">Ready to see it in action?</h3>
+        <p id="welcomeMessage">To make all the magic happen, click Go button:</p>
+        <p><button id="mainBtn" class="btn btn-primary">GO!</button></p>
+        <p><button class="button btn btn-warning" id="toggleBtn" style="display:none">Toggle Examples</button></p>
+        <p><button class="button btn btn-danger" id="clearBtn" style="display:none">Clear Local Storage</button></p>
+
       </div>
     </div>
 
@@ -71,7 +74,7 @@
         <h2>{{heading}}</h2>
         <p>{{paragraph}}</p>
         <h3>Example of Handlbars Syntax</h3>
-        <p>This is what Handlebars syntax looks like. It's pretty straight forward templating. When you click the button above you will see the two example placeholders be replaced with rendered content returned from an ajax request to the server that contains both the data and the template together. It's pretty slick.</p>
+        <p>This is what Handlebars syntax looks like. It's pretty straight forward templating. When you click the button above you will see the three example placeholders be replaced with rendered content returned from an ajax request to the server that contains both the data and the template together. It's pretty slick.</p>
         <p>In the real world, you'd not have any of the Handlebar syntax actually showing, it would be seemless and just work.</p>
         <p>Below you'll see the template syntax that will be rendered from the server when you click the button above.</p>
       </div>
