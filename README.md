@@ -307,4 +307,4 @@ This is all pretty self explanatory. We'll be moving this logic out to a route s
 To see more about what's coming as we go, check out the [issues](http://github.com/niczak/Handlebars/issues/).
 
 
-#### Note: This will not make your computer survive acquatic conditions or teach you how to tie a cherry stem. 
+#### Note: This will not make your computer survive acquatic [conditions](https://www.youtube.com/watch?v=HLUX0y4EptA) or teach you how to tie a cherry stem. 
