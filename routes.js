@@ -6,41 +6,25 @@ app.get( '/templates', function( req, res ) {
   var templates =
   {
     buttons: {
-        template: "<h2>{{buttonsWidgetHeading}}</h2>\n<div class='btn-group btn-group-justified'>\n{{#each buttonWidgetButtons}}\n<div class='btn-group'>\n<button onclick=\"window.open(\'//{{link}}\', \'_blank\');\" type='button' class='btn {{style}}'>{{#if icon}}<i class='fa {{icon}}'></i> {{/if}}{{buttonName}}</button>\n</div>\n{{/each}}\n</div>\n",
+        row: 1,
+        pos: 1,
+        col: 12,
+        template: "<h2>{{buttonsWidgetHeading}}</h2>\n<div class='btn-group btn-group-justified'>\n{{#each buttonWidgetButtons}}\n<div class='btn-group'>\n<button onclick=\"window.open(\'//{{link}}\', \'_blank\');\" type='button' class='btn {{style}}'>{{#if icon}}<i class='fa {{icon}}'></i> {{/if}}{{buttonName}}</button>\n</div>\n{{/each}}\n</div>\n"
     },
     feed: {
-        template: "<h2>{{feedWidgetHeading}}</h2>\n{{#each feedItems}}\n<div class='panel panel-default'>\n<div class='panel-heading'>{{feedTitle}}</div>\n<div class='panel-body'>\n<p>{{feedMessage}}</p>\n</div>\n<div class='panel-footer text-muted'>\n<small>{{feedDate}}</small>\n</div>\n</div>\n{{/each}}\n",
+        row: 2,
+        pos: 1,
+        col: 6,
+        template: "<h2>{{feedWidgetHeading}}</h2>\n{{#each feedItems}}\n<div class='panel panel-default'>\n<div class='panel-heading'>{{feedTitle}}</div>\n<div class='panel-body'>\n<p>{{feedMessage}}</p>\n</div>\n<div class='panel-footer text-muted'>\n<small>{{feedDate}}</small>\n</div>\n</div>\n{{/each}}\n"
     },
     articles: {
-        template: "<h2>{{articleWidgetHeading}}</h2>\n{{#each articleWidgetParagraph}}\n<p>{{this}}</p>\n{{/each}}\n",
+        row: 2,
+        pos: 2,
+        col: 6,
+        template: "<h2>{{articleWidgetHeading}}</h2>\n{{#each articleWidgetParagraph}}\n<p>{{this}}</p>\n{{/each}}\n"
     }
   }
   res.send( templates );
-});
-
-app.get( '/positions', function( req, res ) {
-  var positions =
-  {
-    buttons:
-    {
-      row: 1,
-      pos: 1,
-      col: 12
-    },
-    feed:
-    {
-      row: 2,
-      pos: 1,
-      col: 6
-    },
-    articles:
-    {
-      row: 2,
-      pos: 2,
-      col: 6
-    }
-  }
-  res.send( positions );
 });
 
 app.get( '/content', function( req, res ) {
