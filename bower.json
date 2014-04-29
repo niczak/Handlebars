@@ -10,9 +10,10 @@
     "test",
     "tests"
   ],
-  "homepage": "https://github.com/fskirschbaum/Handlebars",
+  "homepage": "https://github.com/niczak/Handlebars",
   "authors": [
-    "fskirschbaum <fskirschbaum@gmail.com>"
+    "F. Stephen Kirschbaum <@fskirschbaum>",
+    "Nicholas Kreidberg <@niczak>"
   ],
   "description": "A simple example of using remote templates and data for handlebars.",
   "license": "MIT",
