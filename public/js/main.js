@@ -8,94 +8,105 @@ $( function() {
       $widgetContainer = $( '#widgetContainer' ),
       $examples = $( '#examples' );
 
-	$( document ).ready( function() {
-		if ( window.localStorage.data ) {
-			var oldData = JSON.parse( window.localStorage.data ),
-					template = Handlebars.compile( oldData.template ),
-					content = template( oldData.content );
-
-			$welcomeHeader.html( 'Welcome Back!' );
-			$welcomeMessage.html( 'Since you\'ve been here before, we\'ve processed your stored data and re-displayed it. You can use the Ready button to get new data, and if you refresh the page you should see it persist. You can hit the Toggle Examples Button to toggle between the syntax container that was removed and the content that was rendered. You can also hit the Clear Local Storage button to reset the Local Storage and refresh the page back to the original state.' );
-			$toggleBtn.show();
-			$clearBtn.show();
-			$mainBtn.html( 'Again?' );
-      $widgetContainer.fadeIn( function() {
-        $widgetContainer.html( content );
-        $examples.hide();
-      });
-		}
-	});
-  
-  function processData( data ) {
+  function processTemplates( templates ) {
     var template = '',
         templateArray = [],
-        contentArray = [],
-        result = {},
         currentRow = 0,
         lastRow = 0;
-    
-    for ( widget in data ) {
-      for ( property in data[widget] ) {
+
+    for ( widget in templates ) {
+      for ( property in templates[widget] ) {
         switch ( property ) {
           case 'row' :
             lastRow = currentRow;
-            if ( currentRow < data[widget][property] ) {
+            if ( currentRow < templates[widget][property] ) {
               if ( lastRow !== 0 ) {
-                template += '</div>\n';
-                templateArray.push('</div>\n');
+                templateArray.push('</div>');
               }
-              currentRow = data[widget][property];
-              template += '<div class="row">\n';
-              templateArray.push( '<div class="row">\n' )
+              currentRow = templates[widget][property];
+              templateArray.push( '<div class="row">' )
             }
             break;
           case 'pos' :
             // We're not doing anything with this... yet?
             break;
           case 'col' :
-            template += '<div class="col-md-' + data[widget][property] + '">\n';
-            templateArray.push( '<div class="col-md-' + data[widget][property] + '">\n' );
+            templateArray.push( '<div class="col-md-' + templates[widget][property] + '">' );
             break;
           case 'template' :
-            template += data[widget][property];
-            templateArray.push( data[widget][property] );
-            break;
-          case 'content' :
-            contentArray.push( data[widget][property] );
+            templateArray.push( templates[widget][property] );
             break;
           default :
             break;
         }
       }
-      template += '</div>\n';
-      templateArray.push( '</div>\n' );
+      templateArray.push( '</div>' );
     }
-    template += '</div>\n';
-    templateArray.push( '</div>\n' );
-    console.log( templateArray );
-    result.template = template;
-    result.content = {};
-    contentArray.forEach( function( el, idx, arr ) {
-      for ( prop in el ) {
-        result.content[prop] = el[prop];        
-      }
-    });
-    console.log( result );
-    return result;
+    templateArray.push( '</div>' );
+    template = templateArray.join( '\n' );
+    return template;
   }
 
+  function processContent( content ) {
+
+    var temporaryArray = [],
+        returnArray = [];
+
+    for ( widget in content ) {
+        temporaryArray.push( content[widget] );
+    }
+
+    temporaryArray.forEach( function( el, idx, arr ) {
+      for ( prop in el ) {
+        returnArray[prop] = el[prop];
+      }
+    });
+
+    return returnArray;
+  }
+
+  if ( !window.localStorage.templates ) {
+    $.ajax({
+      type: 'GET',
+      url: '/templates',
+      success: function( data, status, request ) {
+        console.log( 'Ajax Success: ' + status );
+        window.localStorage.setItem( 'templates', JSON.stringify( data ));
+      },
+      error: function( request, status ) {
+        console.log( 'Ajax error: ' + status);
+      }
+
+    }, 'json');
+  }
+
+	if ( window.localStorage.content  && window.localStorage.templates ) {
+
+    var template = Handlebars.compile( processTemplates( JSON.parse( window.localStorage.templates ) ) ),
+        html = template( processContent( JSON.parse( window.localStorage.content )));
+
+		$welcomeHeader.html( 'Welcome Back!' );
+		$welcomeMessage.html( 'Since you\'ve been here before, we\'ve processed your stored data and re-displayed it. You can use the Ready button to get new data, and if you refresh the page you should see it persist. You can hit the Toggle Examples Button to toggle between the syntax container that was removed and the content that was rendered. You can also hit the Clear Local Storage button to reset the Local Storage and refresh the page back to the original state.' );
+		$toggleBtn.show();
+		$clearBtn.show();
+		$mainBtn.html( 'Again?' );
+    $widgetContainer.fadeIn( function() {
+      $widgetContainer.html( html );
+      $examples.hide();
+    });
+	}
+
   $mainBtn.click( function() {
-  $.ajax( {
-      type: 'GET', 
-      url: '/data',
+    $.ajax( {
+      type: 'GET',
+      url: '/content',
       success: function( data, status, request ) {
         console.log( 'ajax success:', data );
 
-        var processedData = processData( data ),
-        		template = Handlebars.compile( processedData.template ),
-            content = template( processedData.content );
+        var template = Handlebars.compile( processTemplates( JSON.parse( window.localStorage.templates ) ) ),
+            html = template( processContent( data ) );
 
-        window.localStorage.setItem( 'data', JSON.stringify( processedData ) );
+        window.localStorage.setItem( 'content', JSON.stringify( data ) );
 
         $mainBtn.fadeOut( function() {
           $mainBtn.removeClass( 'btn-primary' ).addClass( 'btn-success' ).html( 'Success!' ).fadeIn( function() {
@@ -106,7 +117,7 @@ $( function() {
           });
         });
         $widgetContainer.fadeIn( function() {
-          $widgetContainer.html( content );
+          $widgetContainer.html( html );
           $examples.hide();
         });
         $welcomeHeader.html( 'Success!!' );
