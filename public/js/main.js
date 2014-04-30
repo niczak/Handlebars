@@ -1,10 +1,10 @@
 $( function() {
 
-	var $welcomeHeader = $( '#welcomeHeader' ),
-			$welcomeMessage = $( '#welcomeMessage' ),
-			$mainBtn = $( '#mainBtn' ),
-			$toggleBtn = $( '#toggleBtn'),
-			$clearBtn = $( '#clearBtn' ),
+  var $welcomeHeader = $( '#welcomeHeader' ),
+      $welcomeMessage = $( '#welcomeMessage' ),
+      $mainBtn = $( '#mainBtn' ),
+      $toggleBtn = $( '#toggleBtn'),
+      $clearBtn = $( '#clearBtn' ),
       $widgetContainer = $( '#widgetContainer' ),
       $examples = $( '#examples' );
 
@@ -80,21 +80,21 @@ $( function() {
     }, 'json');
   }
 
-	if ( window.localStorage.content  && window.localStorage.templates ) {
+  if ( window.localStorage.content  && window.localStorage.templates ) {
 
     var template = Handlebars.compile( processTemplates( JSON.parse( window.localStorage.templates ) ) ),
         html = template( processContent( JSON.parse( window.localStorage.content )));
 
-		$welcomeHeader.html( 'Welcome Back!' );
-		$welcomeMessage.html( 'Since you\'ve been here before, we\'ve processed your stored data and re-displayed it. You can use the Ready button to get new data, and if you refresh the page you should see it persist. You can hit the Toggle Examples Button to toggle between the syntax container that was removed and the content that was rendered. You can also hit the Clear Local Storage button to reset the Local Storage and refresh the page back to the original state.' );
-		$toggleBtn.show();
-		$clearBtn.show();
-		$mainBtn.html( 'Again?' );
+    $welcomeHeader.html( 'Welcome Back!' );
+    $welcomeMessage.html( 'Since you\'ve been here before, we\'ve processed your stored data and re-displayed it. You can use the Ready button to get new data, and if you refresh the page you should see it persist. You can hit the Toggle Examples Button to toggle between the syntax container that was removed and the content that was rendered. You can also hit the Clear Local Storage button to reset the Local Storage and refresh the page back to the original state.' );
+    $toggleBtn.show();
+    $clearBtn.show();
+    $mainBtn.html( 'Again?' );
     $widgetContainer.fadeIn( function() {
       $widgetContainer.html( html );
       $examples.hide();
     });
-	}
+  }
 
   $mainBtn.click( function() {
     $.ajax( {
@@ -110,7 +110,7 @@ $( function() {
 
         $mainBtn.fadeOut( function() {
           $mainBtn.removeClass( 'btn-primary' ).addClass( 'btn-success' ).html( 'Success!' ).fadeIn( function() {
-          	$toggleBtn.fadeIn();
+            $toggleBtn.fadeIn();
             setTimeout( function(){
               $mainBtn.removeClass( 'btn-success' ).addClass( 'btn-primary' ).html( 'Again?' );
             }, 2000 );
@@ -134,15 +134,15 @@ $( function() {
         });
       }
     }, 'json');
-	});
+  });
 
-	$toggleBtn.click( function() {
-	  $examples.toggle();
+  $toggleBtn.click( function() {
+    $examples.toggle();
     $widgetContainer.toggle();
-	});
+  });
 
-	$clearBtn.click( function() {
-		window.localStorage.clear();
-		window.location.reload();
-	});
+  $clearBtn.click( function() {
+    window.localStorage.clear();
+    window.location.reload();
+  });
 });

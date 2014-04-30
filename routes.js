@@ -29,7 +29,6 @@ app.get( '/templates', function( req, res ) {
 
 app.get( '/content', function( req, res ) {
 
-  var today = helper.getCurrentDate();
   helper.getHipsterIpsum( function( pArray ) {
   var content =
       {
@@ -72,27 +71,27 @@ app.get( '/content', function( req, res ) {
           {
             "feedTitle" : "Feed_Item_One",
             "feedMessage" : "Feed message one goes here...",
-            "feedDate" : today
+            "feedDate" : helper.getSemiRandomDate() + ' @ ' + helper.getSemiRandomTime()
           },
           {
             "feedTitle" : "Feed_Item_Two",
             "feedMessage" : "Feed message two goes here...",
-            "feedDate" : today
+            "feedDate" : helper.getSemiRandomDate() + ' @ ' + helper.getSemiRandomTime()
           },
           {
             "feedTitle" : "Feed_Item_Three",
             "feedMessage" : "Feed message three goes here...",
-            "feedDate" : today
+            "feedDate" : helper.getSemiRandomDate() + ' @ ' + helper.getSemiRandomTime()
           },
           {
             "feedTitle" : "Feed_Item_Four",
             "feedMessage" : "Feed message four goes here...",
-            "feedDate" : today
+            "feedDate" : helper.getSemiRandomDate() + ' @ ' + helper.getSemiRandomTime()
           },
           {
             "feedTitle" : "Feed_Item_Five",
             "feedMessage" : "Feed message five goes here...",
-            "feedDate" : today
+            "feedDate" : helper.getCurrentDate() + ' @ ' + helper.getCurrentTime()
           },
         ]
       },
