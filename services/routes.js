@@ -1,6 +1,8 @@
 
 var app = module.parent.exports.app,
-    helper = require( './helper' );
+    moment = require( 'moment' ),
+    helper = require( './helper' ),
+    feed = require( './feed' );
 
 app.get( '/templates', function( req, res ) {
   var templates =
@@ -28,9 +30,10 @@ app.get( '/templates', function( req, res ) {
 });
 
 app.get( '/content', function( req, res ) {
+  var feedItems = feed.responder();
 
-  helper.getHipsterIpsum( function( pArray ) {
-  var content =
+  helper.getHipsterIpsum( function( hipsterIpsum ) {
+      var content =
       {
         buttons:
         {
@@ -66,44 +69,17 @@ app.get( '/content', function( req, res ) {
       feed:
       {
         "feedWidgetHeading" : "Feed Widget Heading",
-        "feedItems" :
-        [
-          {
-            "feedTitle" : "Feed_Item_One",
-            "feedMessage" : "Feed message one goes here...",
-            "feedDate" : helper.getSemiRandomDate() + ' @ ' + helper.getSemiRandomTime()
-          },
-          {
-            "feedTitle" : "Feed_Item_Two",
-            "feedMessage" : "Feed message two goes here...",
-            "feedDate" : helper.getSemiRandomDate() + ' @ ' + helper.getSemiRandomTime()
-          },
-          {
-            "feedTitle" : "Feed_Item_Three",
-            "feedMessage" : "Feed message three goes here...",
-            "feedDate" : helper.getSemiRandomDate() + ' @ ' + helper.getSemiRandomTime()
-          },
-          {
-            "feedTitle" : "Feed_Item_Four",
-            "feedMessage" : "Feed message four goes here...",
-            "feedDate" : helper.getSemiRandomDate() + ' @ ' + helper.getSemiRandomTime()
-          },
-          {
-            "feedTitle" : "Feed_Item_Five",
-            "feedMessage" : "Feed message five goes here...",
-            "feedDate" : helper.getCurrentDate() + ' @ ' + helper.getCurrentTime()
-          },
-        ]
+        "feedItems" : feedItems
       },
       articles:
       {
         "articleWidgetHeading" : "Article Widget Heading",
         "articleWidgetParagraph" :
         [
-          pArray[0],
-          pArray[1],
-          pArray[2],
-          pArray[3],
+          hipsterIpsum[0],
+          hipsterIpsum[1],
+          hipsterIpsum[2],
+          hipsterIpsum[3],
         ]
       }
     }
