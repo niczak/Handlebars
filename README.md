@@ -43,7 +43,7 @@ You can change the configuration in Gruntfile.js and app.js if you want differen
 ### Basic usage:
 
 
-Open up http://localhost:3000 (or your codio url) and you'll see a simple example page. When you click the buttons it will update the content on the page with new content recieved from the server.
+Open up http://localhost:3000 (or your codio url) and you'll see a simple example page. When you click the buttons it will update the content on the page with new content received from the server.
 
 This is part of the magic on the client side:
 
@@ -115,123 +115,9 @@ $( function() {
 
   {...}
 ```
- And on the server side we've configured a route thusly:
 
- ```javascript
+And on the server side we've configured a couple routes that now generate some random data to return with each request. This is advantageous for many reasons, but it's no longer sensible to include examples of all the code in this README file. Just dig into the code to see how it all works. There will even be some awesome commenting there soon. 
 
-var app = module.parent.exports.app,
-    helper = require( './helper' );
-
-app.get( '/templates', function( req, res ) {
-  var templates =
-  {
-    buttons: {
-        row: 1,
-        pos: 1,
-        col: 12,
-        template: "<h2>{{buttonsWidgetHeading}}</h2>\n<div class='btn-group btn-group-justified'>\n{{#each buttonWidgetButtons}}\n<div class='btn-group'>\n<button onclick=\"window.open(\'//{{link}}\', \'_blank\');\" type='button' class='btn {{style}}'>{{#if icon}}<i class='fa {{icon}}'></i> {{/if}}{{buttonName}}</button>\n</div>\n{{/each}}\n</div>\n"
-    },
-    feed: {
-        row: 2,
-        pos: 1,
-        col: 6,
-        template: "<h2>{{feedWidgetHeading}}</h2>\n{{#each feedItems}}\n<div class='panel panel-default'>\n<div class='panel-heading'>{{feedTitle}}</div>\n<div class='panel-body'>\n<p>{{feedMessage}}</p>\n</div>\n<div class='panel-footer text-muted'>\n<small>{{feedDate}}</small>\n</div>\n</div>\n{{/each}}\n"
-    },
-    articles: {
-        row: 2,
-        pos: 2,
-        col: 6,
-        template: "<h2>{{articleWidgetHeading}}</h2>\n{{#each articleWidgetParagraph}}\n<p>{{this}}</p>\n{{/each}}\n"
-    }
-  }
-  res.send( templates );
-});
-
-app.get( '/content', function( req, res ) {
-
-  var today = helper.getCurrentDate();
-  helper.getHipsterIpsum( function( pArray ) {
-  var content =
-      {
-        buttons:
-        {
-          "buttonWidgetHeading" : "Button Widget Heading",
-          "buttonWidgetButtons" :
-          [
-            {
-              "buttonName" : "Google Plus",
-              "link" : "plus.google.com",
-              "icon" : "fa-google-plus",
-              "style" : "btn-success"
-            },
-            {
-              "buttonName" : "Facebook",
-              "link" : "www.facebook.com",
-              "icon" : "fa-facebook",
-              "style" : "btn-primary"
-            },
-            {
-              "buttonName" : "Twitter",
-              "link" : "twitter.com",
-              "icon" : "fa-twitter",
-              "style" : "btn-info"
-            },
-            {
-              "buttonName" : "Pinterest",
-              "link" : "pinterest.com",
-              "icon" : "fa-pinterest",
-              "style" : "btn-warning"
-            }
-          ]
-      },
-      feed:
-      {
-        "feedWidgetHeading" : "Feed Widget Heading",
-        "feedItems" :
-        [
-          {
-            "feedTitle" : "Feed_Item_One",
-            "feedMessage" : "Feed message one goes here...",
-            "feedDate" : today + ' @ ' + time
-          },
-          {
-            "feedTitle" : "Feed_Item_Two",
-            "feedMessage" : "Feed message two goes here...",
-            "feedDate" : today + ' @ ' + time
-          },
-          {
-            "feedTitle" : "Feed_Item_Three",
-            "feedMessage" : "Feed message three goes here...",
-            "feedDate" : today + ' @ ' + time
-          },
-          {
-            "feedTitle" : "Feed_Item_Four",
-            "feedMessage" : "Feed message four goes here...",
-            "feedDate" : today + ' @ ' + time
-          },
-          {
-            "feedTitle" : "Feed_Item_Five",
-            "feedMessage" : "Feed message five goes here...",
-            "feedDate" : today + ' @ ' + time
-          },
-        ]
-      },
-      articles:
-      {
-        "articleWidgetHeading" : "Article Widget Heading",
-        "articleWidgetParagraph" :
-        [
-          pArray[0],
-          pArray[1],
-          pArray[2],
-          pArray[3],
-        ]
-      }
-    }
-  res.send( content );
-  });
-});
-```
 
 This is all pretty self explanatory. We'll be moving this logic out to a route soon, but for now... it's functional.
 
@@ -239,4 +125,4 @@ This is all pretty self explanatory. We'll be moving this logic out to a route s
 To see more about what's coming as we go, check out the [issues](http://github.com/niczak/Handlebars/issues/).
 
 
-#### Note: This will not make your computer survive acquatic [conditions](https://www.youtube.com/watch?v=HLUX0y4EptA) or teach you how to tie a cherry stem.
+#### Note: This will not make your computer survive aquatic [conditions](https://www.youtube.com/watch?v=HLUX0y4EptA) or teach you how to tie a cherry stem.
