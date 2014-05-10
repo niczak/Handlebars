@@ -18,3 +18,46 @@ a {
   color: rgba(255, 255, 255, 0.85);
   text-shadow: 0 5px 15px rgba(0,0,0,0.85);
 }
+
+.in {
+  background-color: #0e76a8;
+}
+.in:hover, .in:focus, .in:active {
+  background-color: #0A577C;
+}
+
+.gplus {
+  background-color: #dd4b39;
+}
+.gplus:hover, .gplus:focus, .gplus:active {
+  background-color: #A53629;
+}
+
+.fb {
+  background-color: #3b5998;
+}
+.fb:hover, .fb:focus, .fb:active {
+  background-color: #273C68;
+}
+
+.twt {
+  background-color: #55acee;
+}
+.twt:hover, .twt:focus, .twt:active {
+  background-color: #366E99;
+}
+
+.git {
+  background-color: #171515;
+}
+.git:hover, .git:focus, .git:active {
+  background-color: #685D5D;
+}
+
+.pin {
+  background-color: #C8232C;
+}
+
+.pin:hover, .pin:focus, .pin:active {
+  background-color: #9B1C23
+}
