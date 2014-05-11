@@ -44,25 +44,25 @@ app.get( '/content', function( req, res ) {
               "buttonName" : "Google Plus",
               "link" : "plus.google.com",
               "icon" : "fa-google-plus",
-              "style" : "btn-success"
+              "style" : "btn-gplus"
             },
             {
               "buttonName" : "Facebook",
               "link" : "www.facebook.com",
               "icon" : "fa-facebook",
-              "style" : "btn-primary"
+              "style" : "btn-fb"
             },
             {
               "buttonName" : "Twitter",
               "link" : "twitter.com",
               "icon" : "fa-twitter",
-              "style" : "btn-info"
+              "style" : "btn-twt"
             },
             {
               "buttonName" : "Pinterest",
               "link" : "pinterest.com",
               "icon" : "fa-pinterest",
-              "style" : "btn-warning"
+              "style" : "btn-pin"
             }
           ]
       },
