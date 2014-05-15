@@ -25,7 +25,7 @@ app.get( '/templates', function( req, res ) {
         col: 6,
         template: "<h2>{{articleWidgetHeading}}</h2>\n{{#each articleWidgetParagraph}}\n<p>{{this}}</p>\n{{/each}}\n"
     }
-  }
+  };
   res.send( templates );
 });
 
@@ -82,7 +82,7 @@ app.get( '/content', function( req, res ) {
           hipsterIpsum[3],
         ]
       }
-    }
+    };
   res.send( content );
   });
 });
