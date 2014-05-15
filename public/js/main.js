@@ -24,8 +24,8 @@ $( function() {
         currentRow = 0,
         lastRow = 0;
 
-    for ( widget in templates ) { // widget is the name of each widget
-      for ( property in templates[widget] ) { // property element of the widget
+    for ( var widget in templates ) { // widget is the name of each widget
+      for ( var property in templates[widget] ) { // property element of the widget
         switch ( property ) { // work through each property, should be in order needed
           case 'row' :
             lastRow = currentRow; // starts at 0 and then increments as needed.
@@ -34,7 +34,7 @@ $( function() {
                 templateArray.push('</div>');
               }
               currentRow = templates[widget][property]; // increment
-              templateArray.push( '<div class="row">' ) // new row
+              templateArray.push( '<div class="row">' ); // new row
             }
             break;
           case 'pos' : // pos indicates the current position on the row increment starting at 1.
@@ -70,12 +70,12 @@ $( function() {
     var temporaryArray = [],
         returnArray = [];
 
-    for ( widget in content ) { // each widget is processed from object.
+    for ( var widget in content ) { // each widget is processed from object.
         temporaryArray.push( content[widget] ); // just push it into the array blindly
     }
 
     temporaryArray.forEach( function( el, idx, arr ) {
-      for ( prop in el ) {
+      for ( var prop in el ) {
         returnArray[prop] = el[prop]; //shift it all into array, handlebars don't care.
         // that is, if ALL of your variables in your template are unique, then handle-
         // bars will not care. HOWEVER, if you're dealing with possible overlapping

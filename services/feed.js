@@ -67,4 +67,4 @@ module.exports =
       "feedDate" : moment().subtract( 'days', 4 ).format( 'MM/DD/YYYY' ) + ' @ ' + helper.getSemiRandomTime()
     },
   ]
-}
+};
